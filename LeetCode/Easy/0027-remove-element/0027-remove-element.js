@@ -4,13 +4,13 @@
  * @return {number}
  */
 var removeElement = function(nums, val) {
-  let count = 0;
+  let pointer = 0;
+
   for(let i = 0; i < nums.length; i++) {
-    if(nums[i] === val) {
-      nums[i] = 101;
-      count++;
+    if(nums[i] !== val) {
+      nums[pointer] = nums[i];
+      pointer++;
     }
   }
-  nums.sort((a,b) => a - b);
-  return nums.length - count;
+  return pointer;
 };
