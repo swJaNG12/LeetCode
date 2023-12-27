@@ -3,13 +3,10 @@
  * @return {number}
  */
 var heightChecker = function(heights) {
-  const originalOrder =[...heights];
-  heights.sort((a, b) => a - b);
+  const originalOrder = [...heights];
   let count = 0;
-  
-  for(let i = 0; i < heights.length; i++) {
-    if(heights[i] !== originalOrder[i]) count++;
-  }
-  
-  return count
+  heights.sort((a,b) => a-b).forEach((num,i) => {
+    originalOrder[i] !== num ? count += 1 : null;
+  });
+  return count;
 };
