@@ -3,10 +3,10 @@
  * @return {number}
  */
 var dominantIndex = function(nums) {
-  const max = Math.max(...nums);
+  const arr = [...nums].sort((a,b) => b-a);
   
-  for(let i = 0; i < nums.length; i++) {
-    if(nums[i] !== max && nums[i] * 2 > max) return -1;
-  }
-  return nums.indexOf(max);
+  const first = arr[0];
+  const second = arr[1];
+
+  return first >= second * 2 ? nums.indexOf(first) : -1;
 };
