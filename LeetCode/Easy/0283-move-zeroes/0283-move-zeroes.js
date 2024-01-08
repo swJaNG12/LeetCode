@@ -3,16 +3,20 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function(nums) {
-  let writePointer = 0;
-
-  for(let readPointer = 0; readPointer < nums.length; readPointer++) {
-    if(nums[readPointer] !== 0) {
-      let temp = nums[writePointer];
-      nums[writePointer] = nums[readPointer];
-      nums[readPointer] = temp;
-      writePointer++;
+  if(nums.length === 0) return nums;
+  
+  let point = 0;
+  for(let i = 0; i < nums.length; i++) {
+    if(nums[i] !== 0) {
+      if(nums[point] === 0) {
+        const temp = nums[point];
+        nums[point] = nums[i];
+        nums[i] = temp;
+        point++;
+      } else {
+        point++;
+      }
     }
   }
-  
   return nums;
 };
