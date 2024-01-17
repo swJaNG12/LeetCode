@@ -10,16 +10,35 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var detectCycle = function(head) {
-  const set = new Set();
 
-  while(head !== null) {
-    if(set.has(head)) return head;
-    set.add(head);
-    head = head.next;
+// Floyd's Tortoise and Hare Algorithm
+var detectCycle = function(head) {
+  if(head === null) return null;
+  let slow = head, fast = head;
+
+  while(fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if(slow === fast) {
+      slow = head;
+      while(fast !== slow) {
+        slow = slow.next;
+        fast = fast.next;
+      }
+      return slow;
+    }
   }
   return null;
 };
 
-// cycle이 있다면 순환이 시작되는 노드(tail의 next 노드가 가리키는 노드)를 반환,
-// cylce이 없다면 null 반환
+// hash map
+// var detectCycle = function(head) {
+//   const set = new Set();
+
+//   while(head !== null) {
+//     if(set.has(head)) return head;
+//     set.add(head);
+//     head = head.next;
+//   }
+//   return null;
+// };
