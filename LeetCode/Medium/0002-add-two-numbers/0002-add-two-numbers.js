@@ -11,28 +11,29 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-  let p1 = l1, p2 = l2;
-  let num1 = '', num2 = '', numsArr;
-  let sum;
+  let dummy = new ListNode();
+  let current = dummy;
+  let carry = 0;
 
-  while(p1 !== null) {
-    num1 += p1.val;
-    p1 = p1.next
-  }
-  while(p2 !== null) {
-    num2 += p2.val;
-    p2 = p2.next;
-  }
-  sum = BigInt(num1.split('').reverse().join('')) + BigInt(num2.split('').reverse().join(''));
-  numsArr = String(sum).split('').reverse().map(Number);
-  
-  let head = new ListNode(numsArr[0]);
-  let prev = head;
-  for(let i = 1; i < numsArr.length; i++) {
-    let curr = new ListNode(numsArr[i]);
-    prev.next = curr;
-    prev = prev.next;
+  while(l1 !== null || l2 !== null) {
+    let sum = carry;
+    if(l1 !== null) {
+      sum += l1.val;
+      l1 = l1.next;
+    }
+    if(l2 !== null) {
+      sum += l2.val;
+      l2 = l2.next;
+    }
+
+    carry = Math.floor(sum / 10);
+    current.next = new ListNode(sum % 10);
+    current = current.next;
   }
 
-  return head;
+  if(carry > 0) {
+    current.next = new ListNode(carry);
+  }
+
+  return dummy.next;
 };
