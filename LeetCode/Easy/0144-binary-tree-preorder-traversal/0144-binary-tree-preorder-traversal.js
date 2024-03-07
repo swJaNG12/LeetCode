@@ -14,13 +14,13 @@ var preorderTraversal = function(root) {
   let result = [];
   let stack = [];
 
-  if(root !== null) stack.push(root);
-
-  while(stack.length !== 0) {
-    let node = stack.pop();
+  let dfs = (node) => {
+    if(node === null) return;
     result.push(node.val);
-    if(node.right !== null) stack.push(node.right);
-    if(node.left !== null) stack.push(node.left);
+    if(node.left !== null) dfs(node.left);
+    if(node.right !== null) dfs(node.right);
   }
+  dfs(root);
+
   return result;
 };
