@@ -12,7 +12,7 @@ var floodFill = function(image, sr, sc, color) {
   
   while(pixels.length !== 0) {
     const [x,y] = pixels.pop();
-    if(image[x][y] !== originalColor) continue;
+    
     image[x][y] = color
     
     if(y - 1 >= 0 && image[x][y-1] === originalColor) {
